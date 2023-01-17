@@ -1,15 +1,11 @@
-import { useRouter } from "next/router";
 import { Fragment } from "react";
-import { getFilteredEvents } from "../../../utils/constants/dummy-data";
+import { getFilteredEvents } from "../../../utils/api-utils";
 import EventList from "../../../utils/components/events/EventList";
 import ResultsTitle from "../../../utils/components/events/ResultTitle/ResultTitle";
 import ErrorAlert from "../../../utils/components/common/ErrorAlert/ErrorAlert";
 import Button from "../../../utils/components/common/Button/Button";
 
-const FilteredEventsPage = () => {
-  const router = useRouter();
-  const dateArray = router.query.slug;
-
+const FilteredEventsPage = ({ filteredEvents, date, hasError }) => {
   const handleShowAlert = (text) => {
     return (
       <Fragment>
@@ -23,9 +19,30 @@ const FilteredEventsPage = () => {
     );
   };
 
-  if (!dateArray) {
-    return <p className="center">Loading...</p>;
+  if (hasError) {
+    return handleShowAlert("Invalid filters");
   }
+
+  if (!filteredEvents || filteredEvents.length === 0) {
+    return handleShowAlert("Not events found for the chosen filter.");
+  }
+
+  const dateToRender = new Date(date.year, date.month - 1);
+
+  return (
+    <Fragment>
+      <ResultsTitle date={dateToRender} />
+      <EventList items={filteredEvents} />
+    </Fragment>
+  );
+};
+
+export default FilteredEventsPage;
+
+export const getServerSideProps = async (context) => {
+  const { params } = context;
+  const dateArray = params.slug;
+
   const dateObject = {
     year: +dateArray[0],
     month: +dateArray[1],
@@ -39,22 +56,16 @@ const FilteredEventsPage = () => {
     dateObject.month < 1 ||
     dateObject.month > 12
   ) {
-    return handleShowAlert("Invalid filters");
+    return {
+      props: {
+        hasError: true,
+      },
+    };
   }
-  const filteredEvents = getFilteredEvents(dateObject);
 
-  if (!filteredEvents || filteredEvents.length === 0) {
-    return handleShowAlert("Not events found for the chosen filter.");
-  }
+  const filteredEvents = await getFilteredEvents(dateObject);
 
-  const date = new Date(dateObject.year, dateObject.month - 1);
-
-  return (
-    <Fragment>
-      <ResultsTitle date={date} />
-      <EventList items={filteredEvents} />
-    </Fragment>
-  );
+  return {
+    props: { filteredEvents, date: dateObject },
+  };
 };
-
-export default FilteredEventsPage;
