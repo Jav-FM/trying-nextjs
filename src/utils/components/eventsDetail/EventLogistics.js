@@ -2,6 +2,7 @@ import AddressIcon from "../icons/AddressIcon";
 import DateIcon from "../icons/DateIcon";
 import LogisticsItem from "./LogisticsItem";
 import classes from "./EventLogistics.module.css";
+import Image from "next/image";
 
 function EventLogistics({ event }) {
   const { date, location, image, title } = event;
@@ -16,7 +17,7 @@ function EventLogistics({ event }) {
   return (
     <section className={classes.logistics}>
       <div className={classes.image}>
-        <img src={image} alt={title} />
+        <Image src={image} alt={title} width={400} height={400} />
       </div>
       <ul className={classes.list}>
         <LogisticsItem icon={DateIcon}>
