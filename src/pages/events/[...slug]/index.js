@@ -7,9 +7,24 @@ import ErrorAlert from "../../../utils/components/common/ErrorAlert/ErrorAlert";
 import Button from "../../../utils/components/common/Button/Button";
 
 const FilteredEventsPage = ({ filteredEvents, date, hasError }) => {
+  const pageHeadData = (
+    <Head>
+      <title>Filtered Events</title>
+      <meta
+        name="description"
+        content={
+          date
+            ? `All events for ${date.month}/${date.year}`
+            : "Invalid filters for events."
+        }
+      />
+    </Head>
+  );
+
   const handleShowAlert = (text) => {
     return (
       <Fragment>
+        {pageHeadData}
         <ErrorAlert className="center">
           <p>{text}</p>
         </ErrorAlert>
@@ -32,13 +47,7 @@ const FilteredEventsPage = ({ filteredEvents, date, hasError }) => {
 
   return (
     <Fragment>
-      <Head>
-        <title>Filtered Events</title>
-        <meta
-          name="description"
-          content={`All events for ${date.month}/${date.year}`}
-        />
-      </Head>
+      {pageHeadData}
       <ResultsTitle date={dateToRender} />
       <EventList items={filteredEvents} />
     </Fragment>
