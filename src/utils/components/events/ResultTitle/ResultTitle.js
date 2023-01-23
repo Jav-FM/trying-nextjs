@@ -1,4 +1,4 @@
-import Button from "../../common/Button/Button";
+import Button from "../../common/Button";
 import classes from "./ResultTitle.module.css";
 
 const ResultsTitle = ({ date }) => {

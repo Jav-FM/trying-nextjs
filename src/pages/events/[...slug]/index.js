@@ -3,8 +3,8 @@ import Head from "next/head";
 import { getFilteredEvents } from "../../../utils/api-utils";
 import EventList from "../../../utils/components/events/EventList";
 import ResultsTitle from "../../../utils/components/events/ResultTitle/ResultTitle";
-import ErrorAlert from "../../../utils/components/common/ErrorAlert/ErrorAlert";
-import Button from "../../../utils/components/common/Button/Button";
+import ErrorAlert from "../../../utils/components/common/ErrorAlert";
+import Button from "../../../utils/components/common/Button";
 
 const FilteredEventsPage = ({ filteredEvents, date, hasError }) => {
   const pageHeadData = (

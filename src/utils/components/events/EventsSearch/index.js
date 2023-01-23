@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import Button from "../../common/Button/Button";
+import Button from "../../common/Button";
 import classes from "./EventsSearch.module.css";
 
 const EventsSearch = ({ onSearch }) => {

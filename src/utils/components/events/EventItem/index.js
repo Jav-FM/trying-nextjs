@@ -1,6 +1,6 @@
 import Image from "next/image";
 import classes from "./EventItem.module.css";
-import Button from "../../common/Button/Button";
+import Button from "../../common/Button";
 import DateIcon from "../../icons/DateIcon";
 import AddressIcon from "../../icons/AddressIcon";
 import React from "react";

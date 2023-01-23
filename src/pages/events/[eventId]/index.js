@@ -5,10 +5,11 @@ import { getFeaturedEvents } from "../../../utils/api-utils";
 import EventSummary from "../../../utils/components/eventsDetail/EventSummary";
 import EventLogistics from "../../../utils/components/eventsDetail/EventLogistics";
 import EventContent from "../../../utils/components/eventsDetail/EventContent";
-import ErrorAlert from "../../../utils/components/common/ErrorAlert/ErrorAlert";
-import Button from "../../../utils/components/common/Button/Button";
+import ErrorAlert from "../../../utils/components/common/ErrorAlert";
+import Button from "../../../utils/components/common/Button";
+import Comments from "../../../utils/components/input/Comments";
 
-const EventDetailPage = ({ event, hasError }) => {
+const EventDetailPage = ({ event, eventId, hasError }) => {
   const handleShowAlert = (text) => {
     return (
       <Fragment>
@@ -41,6 +42,7 @@ const EventDetailPage = ({ event, hasError }) => {
       <EventContent>
         <p>{event.description}</p>
       </EventContent>
+      <Comments eventId={eventId} />
     </Fragment>
   );
 };
@@ -58,7 +60,7 @@ export const getStaticProps = async (context) => {
     };
   }
   return {
-    props: { event },
+    props: { event, eventId },
     revalidate: 30,
   };
 };
