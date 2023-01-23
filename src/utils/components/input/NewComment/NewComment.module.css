@@ -7,6 +7,10 @@
   padding: 1rem;
 }
 
+.form button {
+  background-color: white;
+}
+
 .row {
   display: flex;
   gap: 1rem;
@@ -35,8 +39,4 @@
   border: 1px solid #ccc;
   width: 100%;
   background-color: #dcfff9;
-}
-
-.button {
-  background-color: white;
 }

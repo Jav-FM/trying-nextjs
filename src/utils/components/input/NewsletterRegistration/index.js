@@ -1,5 +1,5 @@
 import classes from "./NewsletterRegistration.module.css";
-import { validEmailRedex } from "../../../constants";
+import { validEmailRedex } from "../../../helpers/constants";
 import { useRef, useState } from "react";
 
 const NewsletterRegistration = () => {
@@ -13,7 +13,7 @@ const NewsletterRegistration = () => {
     setInvalidEmail(false);
     const email = emailInputRef.current.value;
     if (email.trim() !== "" && email.match(validEmailRedex)) {
-      const response = await fetch("/api/newsletterregistration", {
+      const response = await fetch("/api/newsletter", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

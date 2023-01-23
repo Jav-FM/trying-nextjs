@@ -1,5 +1,6 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import classes from "./NewComment.module.css";
+import { validEmailRegex } from "../../../helpers/constants";
 
 const NewComment = (props) => {
   const [isInvalid, setIsInvalid] = useState(false);
@@ -18,7 +19,7 @@ const NewComment = (props) => {
     if (
       !enteredEmail ||
       enteredEmail.trim() === "" ||
-      !enteredEmail.includes("@") ||
+      !enteredEmail.match(validEmailRegex) ||
       !enteredName ||
       enteredName.trim() === "" ||
       !enteredComment ||
@@ -34,6 +35,12 @@ const NewComment = (props) => {
       text: enteredComment,
     });
   };
+
+  useEffect(() => {
+    emailInputRef.current.value = "";
+    nameInputRef.current.value = "";
+    commentInputRef.current.value = "";
+  }, [props.comments]);
 
   return (
     <form className={classes.form} onSubmit={sendCommentHandler}>
@@ -52,7 +59,9 @@ const NewComment = (props) => {
         <textarea id="comment" rows="5" ref={commentInputRef}></textarea>
       </div>
       {isInvalid && <p>Please enter a valid email address and comment!</p>}
-      <button className={classes.button}>Submit</button>
+      <button style={{ backgroundColor: "white" }} className={classes.button}>
+        Submit
+      </button>
     </form>
   );
 };

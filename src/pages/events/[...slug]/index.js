@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import Head from "next/head";
-import { getFilteredEvents } from "../../../utils/api-utils";
+import { getFilteredEvents } from "../../../utils/helpers/api-utils";
 import EventList from "../../../utils/components/events/EventList";
 import ResultsTitle from "../../../utils/components/events/ResultTitle/ResultTitle";
 import ErrorAlert from "../../../utils/components/common/ErrorAlert";

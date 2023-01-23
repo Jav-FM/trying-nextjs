@@ -31,11 +31,9 @@ const Comments = (props) => {
       },
       body: JSON.stringify(commentData),
     });
-    if (response.status === 200) {
+    if (response.status === 201) {
       getComments();
     }
-
-    // send data to API
   };
 
   return (
@@ -43,7 +41,9 @@ const Comments = (props) => {
       <button onClick={toggleCommentsHandler}>
         {showComments ? "Hide" : "Show"} Comments
       </button>
-      {showComments && <NewComment onAddComment={addCommentHandler} />}
+      {showComments && (
+        <NewComment onAddComment={addCommentHandler} comments={comments} />
+      )}
       {showComments && <CommentList comments={comments} />}
     </section>
   );
