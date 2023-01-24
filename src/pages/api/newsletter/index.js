@@ -15,13 +15,13 @@ const handler = async (req, res) => {
     try {
       client = await connectDatabase();
     } catch (e) {
-      res.status(500).json({ message: "Connecting to the database failed :(" });
+      res.status(500).json({ message: "Connecting to the database failed." });
       return;
     }
     try {
       await insertDocument(client, "newsletter", { email });
     } catch (e) {
-      res.status(500).json({ message: "Inserting data failed :(" });
+      res.status(500).json({ message: "Inserting data failed." });
       return;
     }
     res.status(201).json({ message: "Email was register.", data: email });

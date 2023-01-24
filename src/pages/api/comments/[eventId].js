@@ -12,7 +12,7 @@ const handler = async (req, res) => {
   try {
     client = await connectDatabase();
   } catch (e) {
-    res.status(500).json({ message: "Connecting to the database failed :(" });
+    res.status(500).json({ message: "Connecting to the database failed." });
     return;
   }
 
@@ -55,7 +55,7 @@ const handler = async (req, res) => {
       messageObject._id = result.insertedId;
       res.status(201).json({ message: "Comment added.", data: messageObject });
     } catch (e) {
-      res.status(500).json({ message: "Inserting comment failed :(" });
+      res.status(500).json({ message: "Inserting comment failed." });
     }
   } else {
     res.status(404);
